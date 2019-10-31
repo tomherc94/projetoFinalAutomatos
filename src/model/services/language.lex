@@ -22,7 +22,7 @@ INTEIRO = 0|[1-9][0-9]*
 
 %%
 
-"if"                         { imprimir("Palavra reservada if", yytext()); }
+"if"                         { imprimir("se", yytext()); }
 "then"                       { imprimir("Palavra reservada then", yytext()); }
 {BRANCO}                     { imprimir("Espaço em branco", yytext()); }
 {ID}                         { imprimir("Identificador", yytext()); }
