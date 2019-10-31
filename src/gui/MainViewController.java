@@ -36,6 +36,6 @@ public class MainViewController {
 		StringBuilder result = new StringBuilder();
 		result.append(lexical.yylex());
 		//txtAreaC.setText(lexical.yylex().toString());
-		System.out.println(result.toString());
+		//System.out.println(result.toString());
 	}
 }
