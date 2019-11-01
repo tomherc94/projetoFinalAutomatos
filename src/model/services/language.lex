@@ -4,8 +4,8 @@ package model.services;
 
 %{
 
-private void imprimir(String descricao, String lexema) {
-    System.out.println(lexema + " - " + descricao);
+private void imprimir(String descricao) {
+    System.out.print(descricao);
 }
 
 %}
@@ -15,35 +15,48 @@ private void imprimir(String descricao, String lexema) {
 %type void
 
 
-BRANCO = [\n| |\t|\r]
+BRANCO = [\n| |\t|\r]*
 ID = [_|a-z|A-Z][a-z|A-Z|0-9|_]*
-SOMA = "+"
+//OPERADORES = ["+","-","*","/","%"]
 INTEIRO = 0|[1-9][0-9]*
-QUALQUER_COISA = .
+//QUEBRA_LINHA = (.|\s)*
 
 %%
 
-"se"                         { imprimir("if", yytext()); }
-"faca"                       { imprimir("{", yytext()); }
-"entao"                      { imprimir("{", yytext()); }
-"para"                       { imprimir("for", yytext()); }
-"enquanto"                   { imprimir("while", yytext()); }
-"fim-se"                     { imprimir("}", yytext()); }
-"fim-para"                   { imprimir("}", yytext()); }
-"fim-enquanto"               { imprimir("}", yytext()); }
-"escolha"                    { imprimir("switch", yytext()); }
-"fim-escolha"                { imprimir("}", yytext()); }
-"caso"                       { imprimir("case", yytext()); }
-"leia"                       { imprimir("scanf", yytext()); }
-"real"                    	 { imprimir("float", yytext()); }
-"inteiro"                    { imprimir("int", yytext()); }
-"caracter"                    { imprimir("char", yytext()); }
-
+"inicio"*					 { imprimir("int main(){"); }
+"fim"*					     { imprimir("}"); }
+"se"*                         { imprimir("if"); }
+"faca"*                       { imprimir("{"); }
+"entao"*                      { imprimir("{"); }
+"para"*                       { imprimir("for"); }
+"enquanto"*                   { imprimir("while"); }
+"fim-se"*                     { imprimir("}"); }
+"fim-para"*                   { imprimir("}"); }
+"fim-enquanto"*               { imprimir("}"); }
+"escolha"*                    { imprimir("switch"); }
+"fim-escolha"*                { imprimir("}"); }
+"caso"*                       { imprimir("case"); }
+"leia"*                       { imprimir("scanf"); }
+"real"*                    	 { imprimir("float"); }
+"inteiro"*                    { imprimir("int"); }
+"caracter"*                   { imprimir("char"); }
+[(]*							 { imprimir("("); }
+[)]*						     { imprimir(")"); }
+[+]*							 { imprimir("+"); }
+[-]*							 { imprimir("-"); }
+[*]*							 { imprimir("*"); }
+[:]*						     { imprimir(":"); }
+[%]*							 { imprimir("%"); }
+"ou"*						 { imprimir("||"); }
+"e"*							 { imprimir("&&"); }
+[<]*							 { imprimir("<"); }
+[>]*							 { imprimir(">"); }
+[\n]*						 { imprimir("\n"); }
 	
-{BRANCO}                     { imprimir("Espaço em branco", yytext()); }
-{ID}                         { imprimir("Identificador", yytext()); }
-{SOMA}                       { imprimir("Operador de soma", yytext()); }
-{INTEIRO}                    { imprimir("Número Inteiro", yytext()); }
-{QUALQUER_COISA}			 { imprimir("", yytext()); }
+{BRANCO}                     { imprimir(" "); }
+{ID}                         { imprimir(yytext()); }
+//{OPERADORES}               { imprimir(OPERADORES, yytext()); }
+{INTEIRO}                    { imprimir(yytext()); }
+//{QUEBRA_LINHA}				 { imprimir("\n"); }
 
 . { throw new RuntimeException("Caractere inválido " + yytext()); }

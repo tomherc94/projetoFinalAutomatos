@@ -33,8 +33,8 @@ public class MainViewController {
 
 	public void convert(StringBuilder sb) throws IOException {
 		LexicalAnalyzer lexical = new LexicalAnalyzer(new StringReader(sb.toString()));
-		StringBuilder result = new StringBuilder();
-		result.append(lexical.yylex());
+		//StringBuilder result = new StringBuilder();
+		lexical.yylex();
 		//txtAreaC.setText(lexical.yylex().toString());
 		//System.out.println(result.toString());
 	}
