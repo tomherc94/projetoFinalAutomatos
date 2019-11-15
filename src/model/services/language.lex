@@ -43,7 +43,7 @@ INTEIRO = 0|[1-9][0-9]*
 "senao"*                   	{ imprimir("else"); }
 "escreva"*                   { imprimir("printf"); }
 [<-]*							 { imprimir("="); }
-[=]*							 { imprimir("="); }
+[==]*							 { imprimir("=="); }
 [(]*							 { imprimir("("); }
 [)]*						     { imprimir(")"); }
 [+]*							 { imprimir("+"); }
@@ -57,10 +57,12 @@ INTEIRO = 0|[1-9][0-9]*
 [>]*							 { imprimir(">"); }
 [\n]*						 { imprimir("\n"); }
 [\t]*						 { imprimir("\t"); }
+[\t{2}]*						 { imprimir("\t\t"); }
 
+" "*						 { imprimir(" "); }
 	
 {varReal}					{ imprimir(yytext()); }
-{BRANCO}                     { imprimir(" "); }
+//{BRANCO}                     { imprimir(" "); }
 {ID}                         { imprimir(yytext()); }
 
 //{OPERADORES}               { imprimir(OPERADORES, yytext()); }

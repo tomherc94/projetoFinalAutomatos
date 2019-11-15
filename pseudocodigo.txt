@@ -1,0 +1,6 @@
+inicio
+	inteiro: n1
+	se(n1==10)faca
+		n1<-12
+	fim-se
+fimalgoritmo
