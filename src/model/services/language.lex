@@ -14,7 +14,7 @@ private void imprimir(String descricao) {
 %class LexicalAnalyzer
 %type void
 
-
+varReal = [_|a-z|A-Z][a-z|A-Z|0-9|_][:|,]*
 BRANCO = [\n| |\t|\r]*
 ID = [_|a-z|A-Z][a-z|A-Z|0-9|_]*
 //OPERADORES = ["+","-","*","/","%"]
@@ -24,7 +24,7 @@ INTEIRO = 0|[1-9][0-9]*
 %%
 
 "inicio"*					 { imprimir("int main(){"); }
-"fim"*					     { imprimir("}"); }
+"fimalgoritmo"*					     { imprimir("}"); }
 "se"*                         { imprimir("if"); }
 "faca"*                       { imprimir("{"); }
 "entao"*                      { imprimir("{"); }
@@ -40,6 +40,10 @@ INTEIRO = 0|[1-9][0-9]*
 "real"*                    	 { imprimir("float"); }
 "inteiro"*                    { imprimir("int"); }
 "caracter"*                   { imprimir("char"); }
+"senao"*                   	{ imprimir("else"); }
+"escreva"*                   { imprimir("printf"); }
+[<-]*							 { imprimir("="); }
+[=]*							 { imprimir("="); }
 [(]*							 { imprimir("("); }
 [)]*						     { imprimir(")"); }
 [+]*							 { imprimir("+"); }
@@ -52,9 +56,13 @@ INTEIRO = 0|[1-9][0-9]*
 [<]*							 { imprimir("<"); }
 [>]*							 { imprimir(">"); }
 [\n]*						 { imprimir("\n"); }
+[\t]*						 { imprimir("\t"); }
+
 	
+{varReal}					{ imprimir(yytext()); }
 {BRANCO}                     { imprimir(" "); }
 {ID}                         { imprimir(yytext()); }
+
 //{OPERADORES}               { imprimir(OPERADORES, yytext()); }
 {INTEIRO}                    { imprimir(yytext()); }
 //{QUEBRA_LINHA}				 { imprimir("\n"); }
