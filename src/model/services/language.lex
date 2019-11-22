@@ -42,6 +42,8 @@ INTEIRO = 0|[1-9][0-9]*
 "caracter"*                   { imprimir("char"); }
 "senao"*                   	{ imprimir("else"); }
 "escreva"*                   { imprimir("printf"); }
+[\/]*							 { imprimir("/"); }
+[,]*							 { imprimir(","); }
 [<-]*							 { imprimir("="); }
 [==]*							 { imprimir("=="); }
 [(]*							 { imprimir("("); }
@@ -56,11 +58,12 @@ INTEIRO = 0|[1-9][0-9]*
 [<]*							 { imprimir("<"); }
 [>]*							 { imprimir(">"); }
 [\n]*						 { imprimir("\n"); }
-[\t]*						 { imprimir("\t"); }
-[\t{2}]*						 { imprimir("\t\t"); }
+[\t{4}]*						 { imprimir(yytext()); }
+//(\t{2})*						 { imprimir("\t\t"); }
+//(\t{3})*					 { imprimir("\t\t\t"); }
 
 " "*						 { imprimir(" "); }
-	
+[0-9]						{ imprimir(yytext()); }
 {varReal}					{ imprimir(yytext()); }
 //{BRANCO}                     { imprimir(" "); }
 {ID}                         { imprimir(yytext()); }

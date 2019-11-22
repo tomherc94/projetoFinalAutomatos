@@ -1,6 +1,31 @@
 inicio
-	inteiro: n1
-	se(n1==10)faca
-		n1<-12
-	fim-se
+	inteiro nota1, nota2, media, opcao <- 0
+	
+	enquanto (opcao == 0) faca
+
+		escreva(Digite a nota1:)
+		leia (nota1)
+		escreva(Digite a nota2:)
+		leia(nota2)
+
+		media <- (nota1 + nota2)/2
+
+		escreva(Sua media foi:)
+ 		escreva(media)
+
+		se (media >= 7) entao
+  			escreva(APROVADO)
+			senao se (media < 4) entao
+  				escreva(REPROVADO)
+				senao se (media >= 4 e media < 7) entao
+  					escreva(Precisa fazer prova final)
+				fim-se
+			fim-se
+		fim-se
+
+		escreva(Se quiser refazer digite 0)
+		leia(opcao)
+	fim-enquanto
 fimalgoritmo
+
+MainViewController.result.append(descricao);
